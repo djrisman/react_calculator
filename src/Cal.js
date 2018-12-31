@@ -24,11 +24,14 @@ class Cal extends Component {
 
           if (Object.keys(keyb_operator).includes(keyb)) {
             this.Calculate(keyb_operator[keyb]);
+            e.preventDefault()
           }else if(keyb === "190"){
               this.inputDot();
+              e.preventDefault()
           }else{
               keyb = String.fromCharCode(e.keyCode);
               this.inpuntNumber(keyb);
+              e.preventDefault()
           }
 
         }
