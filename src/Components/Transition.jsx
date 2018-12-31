@@ -19,7 +19,7 @@ render(){
           }
       })}
     </ReactCSSTransitionGroup>
-    <li><h3><u>Note :</u></h3></li>
+    <li><h3><u>Keyboard Keys :</u></h3></li>
       <ul>
         <li>  Number : press "0-9 key"</li>
         <li>  addition : press "+ key"  </li>
