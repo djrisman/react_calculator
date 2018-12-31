@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './Cal.css';
-import Transition from './Components/Transition';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 class Cal extends Component {
 
@@ -21,17 +21,18 @@ class Cal extends Component {
         document.onkeydown = (e)=>{
           let keyb = String(e.keyCode);
           if (keyb === "191" || keyb === "88" || keyb === "189" || keyb === "187" || keyb === "13") {
-
-              const sendOp = {
-                "191" : () => this.Calculate("/"),
-                "88" : () => this.Calculate("*"),
-                "189" : () => this.Calculate("-"),
-                "187" : () => this.Calculate("+"),
-                "13" : () => this.Calculate("="),
-              };
-              const sending = sendOp[keyb]();
-
-
+              if(keyb === "191"){
+                keyb = "/";
+              }else if (keyb === "88") {
+                keyb = "*";
+              }else if (keyb === "189") {
+                keyb = "-";
+              }else if (keyb === "187") {
+                keyb = "+";
+              }else if(keyb === "13") {
+                keyb = "=";
+              }
+              this.Calculate(keyb);
           }else if(keyb === "46"){
               this.inputDot();
           }else{
@@ -50,10 +51,10 @@ class Cal extends Component {
       "*" : (preValue, nextValue) => preValue * nextValue,
       "-" : (preValue, nextValue) => preValue - nextValue,
       "+" : (preValue, nextValue) => preValue + nextValue,
-      "=" : (preValue, nextValue) => nextValue
+      "=" : (preValue, nextValue) =>  nextValue
     };
 
-    const nextValue = input;
+    const nextValue = parseFloat(input);
 
     if(value==null){
       this.setState({
@@ -67,11 +68,10 @@ class Cal extends Component {
 
       this.setState({
         value: calculatedValue,
-        input: calculatedValue,
+        input: String(calculatedValue),
         listHistory: [...this.state.listHistory, newList]
       })
     }
-
     this.setState({
       isWait:true,
       operator:next_op,
@@ -107,14 +107,12 @@ class Cal extends Component {
       }
   }
 
-  Clear_all() {
+  Clear() {
     const { input } = this.state;
     this.setState({
       input:  '0'
     })
   }
-
-
 
   render() {
     console.log(this.state);
@@ -126,7 +124,7 @@ class Cal extends Component {
           <div className="calc-wrapper">
             <div className="input" id="input">{input}</div>
             <div className="row">
-              <button className="button-wrapper clear-btn" onClick ={() => this.Clear_all()} >Clear</button>
+              <button className="button-wrapper clear-btn" onClick ={() => this.Clear()} >Clear</button>
               <button className="button-wrapper operator" onClick ={() =>this.Calculate("/")} >÷</button>
             </div>
             <div className="row">
@@ -160,17 +158,16 @@ class Cal extends Component {
         <div className="app1">
             <ul>
                 <li><h3><u>List of Calculation :</u></h3></li>
-                <Transition list={listHistory} />
-                <li><h3><u>Note For Keyboard Key :</u></h3></li>
-                  <p>
-                      Number press "0-9 key"|
-                      addition press "+ key" |
-                      subtraction press "- key"|
-                      division press "/ key"|
-                      multiplication press "x key"|
-                      equal press "enter key"|
-                      clear press "0 Number key"
-                  </p>
+                <ReactCSSTransitionGroup
+                transitionName="fade"
+                transitionEnterTimeout={300}
+                transitionLeaveTimeout={300}>
+                {listHistory.map(list => {
+                      if(list[1] !== "="){
+                      return <li>{list[0]}{list[1]}{list[2]} = {list[3]} </li>
+                      }
+                  })}
+                </ReactCSSTransitionGroup>
             </ul>
         </div>
 
