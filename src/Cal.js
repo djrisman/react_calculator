@@ -4,16 +4,9 @@ import Transition from './Components/Transition';
 
 class Cal extends Component {
 
-    state = {
-        value:null,
-        input: "0",
-        isWait: false,
-        operator:null,
-        listHistory:[],
-        newList:[],
-      };
+  state = { value:null, input: "0",isWait: false, operator:null, listHistory:[], newList:[] };
 
-    componentDidMount(){
+  componentDidMount(){
         document.onkeydown = (e)=>{
           let keyb = String(e.keyCode);
           const filter_key = ['191','88','189','187','13','190','48','49','50','51','52','53','54','55','56','57'];
@@ -29,16 +22,14 @@ class Cal extends Component {
                 }else{
                     keyb = String.fromCharCode(e.keyCode);
                     this.inpuntNumber(keyb);
-                    //console.log(keyb);
                     e.preventDefault()
                 }
-            }
-        }
+          }
+      }
   }
 
   Calculate(next_op){
     const {input, operator, value} = this.state;
-
     const calculation = {
       "/" : (preValue, nextValue) => preValue / nextValue,
       "*" : (preValue, nextValue) => preValue * nextValue,
@@ -46,15 +37,11 @@ class Cal extends Component {
       "+" : (preValue, nextValue) => preValue + nextValue,
       "=" : (preValue, nextValue) =>  nextValue
     };
-
     const nextValue = parseFloat(input);
 
     if(value==null){
-      this.setState({
-        value: nextValue
-      })
+      this.setState({ value: nextValue })
     }else if(operator){
-
       const currentValue = value;
       const calculatedValue = calculation[operator](currentValue,nextValue);
       const newList = [currentValue,operator,nextValue, calculatedValue];
@@ -72,40 +59,36 @@ class Cal extends Component {
   }
 
   inpuntNumber(Num){
-    const {input, isWait} = this.state;
-    if(isWait){
-      this.setState({
-        input : String(Num),
-        isWait:false
-      })
-    }else {
-      this.setState({
-        input : input === "0" ? String(Num): input + String(Num),
-      })
-    }
-
+      const {input, isWait} = this.state;
+      if(isWait){
+        this.setState({
+          input : String(Num),
+          isWait:false
+        })
+      }else{
+        this.setState({
+          input : input === "0" ? String(Num): input + String(Num),
+        })}
   }
 
   inputDot(){
     const {input, isWait} = this.state;
-    if(isWait){
-      this.setState({
-        input : ".",
-        isWait:false
-      })
-    }else if(input.indexOf(".") === -1){
-        this.setState({
-          input : input + ".",
-        })
-      }
+        if(isWait){
+          this.setState({
+            input : ".",
+            isWait:false
+          })
+        }else if(input.indexOf(".") === -1){
+          this.setState({
+            input : input + ".",
+          })}
   }
 
   Clear() {
     const { input } = this.state;
     this.setState({
       input:  '0'
-    })
-  }
+  })}
 
   render() {
     console.log(this.state);
@@ -146,10 +129,8 @@ class Cal extends Component {
           </div>
         </div>
         <div className="app1">
-            <ul>
-                <li><h3><u>List of Calculation :</u></h3></li>
-                <Transition list={listHistory} />
-            </ul>
+            <ul><li><h3><u>List of Calculation :</u></h3></li>
+                <Transition list={listHistory} /></ul>
         </div>
       </div>
     );
