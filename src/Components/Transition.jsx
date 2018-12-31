@@ -8,6 +8,7 @@ render(){
   const listing = this.props.list;
   console.log(listing);
   return(
+    <div>
     <ReactCSSTransitionGroup
     transitionName="fade"
     transitionEnterTimeout={300}
@@ -18,7 +19,17 @@ render(){
           }
       })}
     </ReactCSSTransitionGroup>
-
+    <li><h3><u>Note :</u></h3></li>
+      <ul>
+        <li>  Number : press "0-9 key"</li>
+        <li>  addition : press "+ key"  </li>
+        <li>  subtraction : press "- key"</li>
+        <li>  division : press  "/ key" </li>
+        <li>  multiplication : press "x key" </li>
+        <li>  equal : press "enter key" </li>
+        <li>  clear : press "0 Number key" </li>
+      </ul>
+    </div>
   )
 }
 
