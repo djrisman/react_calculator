@@ -20,12 +20,9 @@ class Cal extends Component {
     componentDidMount(){
         document.onkeydown = (e)=>{
           let keyb = String(e.keyCode);
-          const operan = ['191', '88', '189', '187', '13'];
+          const keyb_operator = { 191: '/', 88: '*', 189: '-', 187: '+', 13: '='};
 
-          if (operan.includes(keyb)) {
-
-          const keyb_operator = { 191: ['/'], 88: ['*'], 189: ['-'], 187: ['+'], 13: ['=']};
-
+          if (Object.keys(keyb_operator).includes(keyb)) {
               this.Calculate(keyb_operator[keyb]);
           }else if(keyb === "190"){
               this.inputDot();
