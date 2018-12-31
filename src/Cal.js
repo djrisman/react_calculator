@@ -4,9 +4,7 @@ import Transition from './Components/Transition';
 
 class Cal extends Component {
 
-    constructor(props){
-      super(props);
-      this.state = {
+    state = {
         value:null,
         input: "0",
         isWait: false,
@@ -14,8 +12,6 @@ class Cal extends Component {
         listHistory:[],
         newList:[],
       };
-    }
-
 
     componentDidMount(){
         document.onkeydown = (e)=>{
@@ -146,32 +142,17 @@ class Cal extends Component {
               <button className="button-wrapper duo" onClick={() => this.inpuntNumber(0)} >0</button>
               <button className="button-wrapper" onClick={() => this.inputDot()} >.</button>
               <button className="button-wrapper operator" onClick ={() =>this.Calculate("=")}>=</button>
-
             </div>
           </div>
-
         </div>
-
         <div className="app1">
             <ul>
                 <li><h3><u>List of Calculation :</u></h3></li>
                 <Transition list={listHistory} />
-                <li><h3><u>Note :</u></h3></li>
-                  <ul>
-                    <li>  Number : press "0-9 key"| </li>
-                    <li>  addition : press "+ key" | </li>
-                    <li>  subtraction : press "- key"| </li>
-                    <li>  division press : "/ key"| </li>
-                    <li>  multiplication : press "x key"| </li>
-                    <li>  equal press : "enter key"| </li>
-                    <li>  clear press : "0 Number key" </li>
-                  </ul>
             </ul>
         </div>
-
       </div>
     );
   }
 }
-
 export default Cal;
