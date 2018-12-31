@@ -20,7 +20,9 @@ class Cal extends Component {
     componentDidMount(){
         document.onkeydown = (e)=>{
           let keyb = String(e.keyCode);
-          if (keyb === "191" || keyb === "88" || keyb === "189" || keyb === "187" || keyb === "13") {
+          const operan = ['191', '88', '189', '187', '13'];
+
+          if (operan.includes(keyb)) {
               if(keyb === "191"){
                 keyb = "/";
               }else if (keyb === "88") {
