@@ -150,8 +150,9 @@ class Cal extends Component {
             <ul>
                 <li><h3><u>List of Calculation :</u></h3></li>
                 <Transition list={listHistory} />
-                <li><h3><u>Note For Keyboard Key :</u></h3></li>
+                <li><h3><u>Note :</u></h3></li>
                   <p>
+                  Achtung : Calculator Performances will be better if don't mix input through click and keyboard in one operation,
                       Number press "0-9 key"|
                       addition press "+ key" |
                       subtraction press "- key"|
