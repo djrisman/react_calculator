@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './Cal.css';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import Transition from './Components/Transition';
 
 class Cal extends Component {
 
@@ -158,16 +158,17 @@ class Cal extends Component {
         <div className="app1">
             <ul>
                 <li><h3><u>List of Calculation :</u></h3></li>
-                <ReactCSSTransitionGroup
-                transitionName="fade"
-                transitionEnterTimeout={300}
-                transitionLeaveTimeout={300}>
-                {listHistory.map(list => {
-                      if(list[1] !== "="){
-                      return <li>{list[0]}{list[1]}{list[2]} = {list[3]} </li>
-                      }
-                  })}
-                </ReactCSSTransitionGroup>
+                <Transition list={listHistory} />
+                <li><h3><u>Note For Keyboard Key :</u></h3></li>
+                  <p>
+                      Number press "0-9 key"|
+                      addition press "+ key" |
+                      subtraction press "- key"|
+                      division press "/ key"|
+                      multiplication press "x key"|
+                      equal press "enter key"|
+                      clear press "0 Number key"
+                  </p>
             </ul>
         </div>
 
