@@ -23,18 +23,10 @@ class Cal extends Component {
           const operan = ['191', '88', '189', '187', '13'];
 
           if (operan.includes(keyb)) {
-              if(keyb === "191"){
-                keyb = "/";
-              }else if (keyb === "88") {
-                keyb = "*";
-              }else if (keyb === "189") {
-                keyb = "-";
-              }else if (keyb === "187") {
-                keyb = "+";
-              }else if(keyb === "13") {
-                keyb = "=";
-              }
-              this.Calculate(keyb);
+
+          const keyb_operator = { 191: ['/'], 88: ['*'], 189: ['-'], 187: ['+'], 13: ['=']};
+
+              this.Calculate(keyb_operator[keyb]);
           }else if(keyb === "190"){
               this.inputDot();
           }else{
