@@ -33,7 +33,7 @@ class Cal extends Component {
                 keyb = "=";
               }
               this.Calculate(keyb);
-          }else if(keyb === "46"){
+          }else if(keyb === "190"){
               this.inputDot();
           }else{
               keyb = String.fromCharCode(e.keyCode);
