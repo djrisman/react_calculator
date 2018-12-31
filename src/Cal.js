@@ -21,18 +21,17 @@ class Cal extends Component {
         document.onkeydown = (e)=>{
           let keyb = String(e.keyCode);
           if (keyb === "191" || keyb === "88" || keyb === "189" || keyb === "187" || keyb === "13") {
-              if(keyb === "191"){
-                keyb = "/";
-              }else if (keyb === "88") {
-                keyb = "*";
-              }else if (keyb === "189") {
-                keyb = "-";
-              }else if (keyb === "187") {
-                keyb = "+";
-              }else if(keyb === "13") {
-                keyb = "=";
-              }
-              this.Calculate(keyb);
+
+              const sendOp = {
+                "191" : () => this.Calculate("/"),
+                "88" : () => this.Calculate("*"),
+                "189" : () => this.Calculate("-"),
+                "187" : () => this.Calculate("+"),
+                "13" : () => this.Calculate("="),
+              };
+              const sending = sendOp[keyb]();
+
+
           }else if(keyb === "46"){
               this.inputDot();
           }else{
