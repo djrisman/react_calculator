@@ -20,20 +20,23 @@ class Cal extends Component {
     componentDidMount(){
         document.onkeydown = (e)=>{
           let keyb = String(e.keyCode);
+          const filter_key = ['191','88','189','187','13','190','48','49','50','51','52','53','54','55','56','57'];
           const keyb_operator = { 191: '/', 88: '*', 189: '-', 187: '+', 13: '='};
 
-          if (Object.keys(keyb_operator).includes(keyb)) {
-            this.Calculate(keyb_operator[keyb]);
-            e.preventDefault()
-          }else if(keyb === "190"){
-              this.inputDot();
-              e.preventDefault()
-          }else{
-              keyb = String.fromCharCode(e.keyCode);
-              this.inpuntNumber(keyb);
-              e.preventDefault()
-          }
-
+          if(filter_key.includes(keyb)){
+                if (Object.keys(keyb_operator).includes(keyb)) {
+                  this.Calculate(keyb_operator[keyb]);
+                  e.preventDefault()
+                }else if(keyb === "190"){
+                    this.inputDot();
+                    e.preventDefault()
+                }else{
+                    keyb = String.fromCharCode(e.keyCode);
+                    this.inpuntNumber(keyb);
+                    //console.log(keyb);
+                    e.preventDefault()
+                }
+            }
         }
   }
 
@@ -154,16 +157,15 @@ class Cal extends Component {
                 <li><h3><u>List of Calculation :</u></h3></li>
                 <Transition list={listHistory} />
                 <li><h3><u>Note :</u></h3></li>
-                  <p>
-                  Achtung : Calculator Performances will be better if don't mix input through click and keyboard in one operation,
-                      Number press "0-9 key"|
-                      addition press "+ key" |
-                      subtraction press "- key"|
-                      division press "/ key"|
-                      multiplication press "x key"|
-                      equal press "enter key"|
-                      clear press "0 Number key"
-                  </p>
+                  <ul>
+                    <li>  Number : press "0-9 key"| </li>
+                    <li>  addition : press "+ key" | </li>
+                    <li>  subtraction : press "- key"| </li>
+                    <li>  division press : "/ key"| </li>
+                    <li>  multiplication : press "x key"| </li>
+                    <li>  equal press : "enter key"| </li>
+                    <li>  clear press : "0 Number key" </li>
+                  </ul>
             </ul>
         </div>
 
