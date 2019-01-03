@@ -29,7 +29,7 @@ class Cal extends Component {
   }
 
   Calculate(next_op){
-    const {input, operator, value} = this.state;
+    const {input, operator, value, isWait} = this.state;
     const calculation = {
       "/" : (preValue, nextValue) => preValue / nextValue,
       "*" : (preValue, nextValue) => preValue * nextValue,
@@ -45,12 +45,13 @@ class Cal extends Component {
       const currentValue = value;
       const calculatedValue = calculation[operator](currentValue,nextValue);
       const newList = [currentValue,operator,nextValue, calculatedValue];
-
-      this.setState({
-        value: calculatedValue,
-        input: String(calculatedValue),
-        listHistory: [...this.state.listHistory, newList]
-      })
+      if(!isWait){
+        this.setState({
+          value: calculatedValue,
+          input: String(calculatedValue),
+          listHistory: [...this.state.listHistory, newList]
+        })
+      }  
     }
     this.setState({
       isWait:true,
